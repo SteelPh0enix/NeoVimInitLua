@@ -547,6 +547,7 @@ vim.api.nvim_create_autocmd({ 'TabNewEntered' }, {
 })
 
 -- Set termdebugger to rust-gdb when opening Rust files
+-- i'm NOT installing vscode-lldb just to be able to debug stuff, thank you very much
 vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
   pattern = { '*.rs' },
   callback = function()
