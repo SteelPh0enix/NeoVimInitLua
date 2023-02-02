@@ -3,8 +3,13 @@
 -- vim.g.loaded_netrwPlugin = 1
 
 -- change shell
--- vim.o.shell = 'zsh -i'
-vim.o.shell = 'pwsh'
+if vim.loop.os_uname().sysname == 'Windows_NT' then
+  -- use PowerShell on Windows
+  vim.o.shell = 'pwsh'
+else
+  -- use ZSH on everything else
+  vim.o.shell = 'zsh -i'
+end
 
 -- Install packer
 local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
@@ -68,11 +73,14 @@ require('packer').startup(function(use)
   use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
 
   -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
-  -- Windows version
-  use { 'nvim-telescope/telescope-fzf-native.nvim',
-   run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
-  -- Linux version
-  -- use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1 }
+  if vim.loop.os_uname().sysname == 'Windows_NT' then
+    -- Windows version
+    use { 'nvim-telescope/telescope-fzf-native.nvim',
+      run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
+  else
+    -- Linux version
+    use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1 }
+  end
 
   -- nvim tree
   use { 'nvim-tree/nvim-tree.lua', requires = { 'nvim-tree/nvim-web-devicons' } }
