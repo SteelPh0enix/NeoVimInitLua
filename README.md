@@ -9,7 +9,7 @@ This is based on `kickstart.nvim`
 ## Plugin list
 
 * packer.nvim - package manager
-* nvim-lspconfig + masn + mason-lspconfig - LSP
+* nvim-lspconfig + mason + mason-lspconfig - LSP
 * fidget.nvim - status updates for LSP
 * neodev.vim - adnotations and useful utils for config
 * nvim-cmp - autocompletion
