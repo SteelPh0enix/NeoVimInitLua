@@ -2,7 +2,7 @@
 
 This repository contains my NeoVim configuration files.
 
-Currently it's a single `init.lua` but it's supposed to change soon.
+Currently it's a single `init.lua` but it's supposed to change soon™.
 
 This is based on `kickstart.nvim`
 
