@@ -377,10 +377,8 @@ end
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
   clangd = {},
-  -- gopls = {},
-  -- pyright = {},
   rust_analyzer = {},
-  -- tsserver = {},
+  pylsp = {},
 
   sumneko_lua = {
     Lua = {
@@ -417,6 +415,7 @@ mason_lspconfig.setup_handlers {
   end,
 }
 
+-- Python LSP setup
 require('lspconfig').pylsp.setup {
   settings = {
     pylsp = {
@@ -434,6 +433,7 @@ require('lspconfig').pylsp.setup {
   }
 }
 
+-- Rust tools config
 local rt = require('rust-tools')
 rt.setup({
   server = {
@@ -493,7 +493,7 @@ cmp.setup {
   },
 }
 
--- My own additions
+-- My own additions (or rather most of them)
 
 -- format shortcut
 vim.keymap.set('n', '<Leader>f', function()
