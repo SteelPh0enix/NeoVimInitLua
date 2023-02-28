@@ -6,6 +6,9 @@
 if vim.loop.os_uname().sysname == 'Windows_NT' then
   -- use PowerShell on Windows
   vim.o.shell = 'pwsh'
+  vim.o.shellcmdflag = '-Command'
+  vim.o.shellquote = ''
+  vim.o.shellxquote = ''
 else
   -- use ZSH on everything else
   vim.o.shell = 'zsh -i'
@@ -140,6 +143,10 @@ vim.o.mouse = 'a'
 
 -- Enable break indent
 vim.o.breakindent = true
+
+-- Enable smart and autoindent
+vim.o.smartindent = true
+vim.o.autoindent = true
 
 -- Save undo history
 vim.o.undofile = true
@@ -552,6 +559,14 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
   pattern = { '*.rs' },
   callback = function()
     vim.g.termdebugger = 'rust-gdb'
+  end
+})
+
+-- Set default indent width for C/C++ file to 2 spaces
+vim.api.nvim_create_autocmd({'BufEnter'}, {
+  pattern = { '*.c', '*.cpp', '*.h', '*.hpp' },
+  callback = function ()
+    vim.o.shiftwidth = 2
   end
 })
 
